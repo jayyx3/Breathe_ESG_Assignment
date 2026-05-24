@@ -1,0 +1,30 @@
+# Python/Django
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+db.sqlite3
+*.log
+.env
+local_settings.py
+
+# Node/React/Vite
+node_modules/
+dist/
+dist-ssr/
+*.local
+.eslintcache
+
+# System Files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -1,0 +1,28 @@
+services:
+  # 1. Django Backend REST API Service
+  - type: web
+    name: breatheesg-backend
+    env: python
+    buildCommand: "pip install -r requirements.txt && python manage.py migrate && python manage.py seed_emission_factors"
+    startCommand: "gunicorn breatheesg.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.10
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        value: "django-insecure-prod-override-for-esg-reporting-ingestor"
+      - key: ALLOWED_HOSTS
+        value: "*"
+
+  # 2. React Vite + Tailwind Static Frontend Service
+  - type: web
+    name: breatheesg-frontend
+    env: static
+    buildCommand: "npm install && npm run build"
+    publishDir: "dist"
+    headers:
+      - path: /*
+        headers:
+          - key: Cache-Control
+            value: public, max-age=31536000
